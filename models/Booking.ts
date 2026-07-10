@@ -9,7 +9,7 @@ export interface IBooking extends Document {
   guests: number;
   occation?: string;
   specialRequests?: string;
-  status: "confirm" | "cancelled" | "completed";
+  status: "confirmed" | "cancelled" | "completed";
   bookingId: string;
   createadAt: Date;
   updatedAt: Date;
@@ -24,7 +24,7 @@ const BookingSchema = new Schema<IBooking>(
     guests: { type: Number, required: true, min: 1 },
     occation: { type: String, trim: true },
     specialRequests: { type: String, trim: true },
-    status: { type: String, enum: ["confirm", "cancelled", "completed"], default: "confirm" },
+    status: { type: String, enum: ["confirmed", "cancelled", "completed"], default: "confirmed" },
     bookingId: { type: String, unique: true }
   },
   {
