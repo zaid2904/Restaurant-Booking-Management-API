@@ -4,6 +4,7 @@ import type { NextFunction, Request, Response } from 'express';
 import express from 'express';
 import connectDB from "./config/db.js";
 import authRouter from "./routes/authRoutes.js";
+import bookingRouter from "./routes/bookingRoutes.js";
 import restaurantRouter from "./routes/restaurantRoutes.js";
 const app = express();
 dotenv.config();
@@ -23,6 +24,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use("/api/auth", authRouter)
 app.use('/api/restaurants', restaurantRouter)
+app.use('/api/bookings', bookingRouter)
 
 // Global Error Handler
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

@@ -73,6 +73,7 @@ export const createBooking = async (req: AuthRequest, res: Response): Promise<vo
 }
 
 
+
 // get loggd In user bookings
 // get api/bookings/my
 // @access Private
@@ -89,6 +90,9 @@ export const getMyBooking = async (req: AuthRequest, res: Response): Promise<voi
 
 
 
+
+
+
 // cancel a bookings
 // PUT api/bookings/:id/cancel
 // @access Private
@@ -101,6 +105,10 @@ export const cancelBookings = async (req: AuthRequest, res: Response): Promise<v
       })
       return;
     }
+    booking.status = "cancelled"
+    await booking.save()
+    const populatedBooking = await booking.populate("restaurant", "name location image address")
+    res.json(populatedBooking)
   } catch (error: any) {
     console.log(error);
     res.status(400).json({ message: "error.message" })
